@@ -1,0 +1,57 @@
+Docker :
+
+	-  Containerization for an envinronment so we can build our pipeline locally and deploy the container to the cloud so
+		 we are 100% sure that it will work as expected because we have the same version of every thing
+	Commands :
+		1- docker run -it ubuntu bash    -- The -it flag tells docker that it should open an interactive container instance.
+											The --rm flag tells docker that the container should automatically be removed after we close docker.
+											bash tells that you want to run directly the bash command (similarly you can use python)
+		2- docker images                 -- Show all downloaded images
+		3- docker run -it python:3.9
+		4- docker run -it --entrypoint=bash python:3.9
+		5- docker build -t test:pandas . 		-- -t is the tag of the docker we will build
+								-- . is to save the docker in the current directory
+		6- docker run -it -e POSTGRES_USER="root" -e POSTGRES_PASSWORD="root" -e POSTGRES_DB="ny_taxi" -v d:/DE_ZoomCamp/1.Docker-Terraform/ny_taxi_postgres_data:/var/lib/postgresql/data -p 5432 postgres:13 
+						-e  means environmental variable
+						-v mount a location locally to a location on the container
+						-p specify the port to avail
+		
+	
+To run Postgres on Docker and mount a dir to a directory inside
+	
+	
+	docker run -it -e POSTGRES_USER="root" -e POSTGRES_PASSWORD="root" -e POSTGRES_DB="ny_taxi" -v /d/DE_ZoomCamp/1.Docker-Terraform/git/ny_taxi_postgres_data:/var/lib/postgresql/data -p 5432:5432 postgres:15 
+	
+Create network:
+	docker network create pg-network
+
+
+Run the docker container inside a network
+	docker run -it -e POSTGRES_USER="root" -e POSTGRES_PASSWORD="root" -e POSTGRES_DB="ny_taxi" -v //d//DE_ZoomCamp//1.Docker-Terraform//ny_taxi_postgres_data:/var/lib/postgresql/data -p 5432:5432 --network=pg-network --name pg-database postgres:13 
+	
+	
+Connect to the postgresql container and test some queries using CLI:
+	winpty pgcli -h localhost -p 5432 -u root -d ny_taxi 
+python -m pip install pycli
+
+
+ Add-MpPreference -AttackSurfaceReductionOnlyExclusions "C:\Users\ekhaled\AppData\Local\Programs\Python\Python311\Scripts\pip.exe" 
+ 
+ 
+ /var/lib/docker/volumes/90df2bdff550492122cffecc1dfcabda94f6ce7464b4c6a93c82da40f595b56f/_data
+ 
+ 
+ docker run -it -e POSTGRES_USER="root" -e POSTGRES_PASSWORD="root" -e POSTGRES_DB="ny_taxi" -v postgres_data_volume:/var/lib/postgresql/data -p 5432:5432 postgres:13
+
+
+docker run -it -e POSTGRES_USER="root" -e POSTGRES_PASSWORD="root" -e POSTGRES_DB="ny_tax"  -v //d//de_zoomcamp//1.docker-terraform//ny_taxi_postgres_data/:/var/lib/postgresql/data/ -p 5432:5432  postgres:13
+
+
+
+sudo docker run -it -e POSTGRES_USER="root" -e POSTGRES_PASSWORD="root" -e POSTGRES_DB="ny_tax" -v $(pwd)/pg_docker_data:/var/lib/postgresql/data -p 5432:5432 --name pg-database --network=pg-network  postgres:13
+
+docker start -ai pg-database
+
+
+
+
