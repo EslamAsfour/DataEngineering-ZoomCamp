@@ -50,8 +50,12 @@ docker run -it -e POSTGRES_USER="root" -e POSTGRES_PASSWORD="root" -e POSTGRES_D
 
 sudo docker run -it -e POSTGRES_USER="root" -e POSTGRES_PASSWORD="root" -e POSTGRES_DB="ny_tax" -v $(pwd)/pg_docker_data:/var/lib/postgresql/data -p 5432:5432 --name pg-database --network=pg-network  postgres:13
 
-docker start -ai pg-database
+sudo docker start -ai pg-database
 
 
 
+sudo docker run -it -e PGADMIN_DEFAULT_EMAIL="admin@admin.com" -e PGADMIN_DEFAULT_PASSWORD="root" -p 8080:80 --network=pg-network -name pgadmin dpage/admin4
 
+name="yellow_tripdata_2021-01"
+
+python3  Data_Ingestion.py  --file_name yellow_tripdata  --hostname localhost  --user  root  --password root  --port 5432  --DB_name ny_tax --table yellow_taxi_data  --url "testurl"
