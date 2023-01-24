@@ -59,3 +59,6 @@ sudo docker run -it -e PGADMIN_DEFAULT_EMAIL="admin@admin.com" -e PGADMIN_DEFAUL
 name="yellow_tripdata_2021-01"
 
 python3  Data_Ingestion.py  --file_name yellow_tripdata  --hostname localhost  --user  root  --password root  --port 5432  --DB_name ny_tax --table yellow_taxi_data  --url "testurl"
+
+
+
